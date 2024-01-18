@@ -1,0 +1,28 @@
+{
+  "name": "think-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "ts-node index.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "google-ai-studio",
+    "gemini",
+    "conversational-ai"
+  ],
+  "author": "Emir Kabal",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3",
+    "dotenv": "^16.3.1",
+    "h3": "^1.10.0",
+    "ioredis": "^5.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "ts-node": "^10.9.2"
+  }
+}
