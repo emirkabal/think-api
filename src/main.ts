@@ -46,28 +46,32 @@ async function runChat(
     history
   })
 
-  const result = await chat.sendMessage(message)
-  const response = result.response
+  try {
+    const result = await chat.sendMessage(message)
+    const response = result.response
 
-  if (response?.promptFeedback?.blockReason)
-    return getMessage(response?.promptFeedback?.blockReason)
+    if (response?.promptFeedback?.blockReason)
+      return getMessage(response?.promptFeedback?.blockReason)
 
-  const text = response.text()
+    const text = response.text()
 
-  user.append([
-    {
-      role: "user",
-      parts: [{ text: message }]
-    },
-    {
-      role: "model",
-      parts: [{ text: text }]
-    }
-  ])
+    user.append([
+      {
+        role: "user",
+        parts: [{ text: message }]
+      },
+      {
+        role: "model",
+        parts: [{ text: text }]
+      }
+    ])
 
-  await user.save()
+    await user.save()
 
-  return text
+    return text
+  } catch (error) {
+    return "Üzgünüm, şu anda cevap veremiyorum."
+  }
 }
 
 const app = createApp()
@@ -124,5 +128,5 @@ app
   .use(router)
 
 createServer(toNodeListener(app)).listen(process.env.PORT || 3000, () => {
-  console.log("Listening on port 3000")
+  console.log("Listening on port " + process.env.PORT || 3000)
 })
