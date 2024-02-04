@@ -54,6 +54,7 @@ async function runChat(
       return getMessage(response?.promptFeedback?.blockReason)
 
     const text = response.text()
+    if (!text.length) throw new Error("Empty response")
 
     user.append([
       {
